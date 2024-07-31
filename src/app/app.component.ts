@@ -12,7 +12,6 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.environmentNew = environment;
-    console.log("env", process, process.env);
     console.log("environment", environment)
   }
 
