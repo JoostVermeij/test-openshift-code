@@ -1,0 +1,8 @@
+export const environment = {
+  MESSAGE: '${MESSAGE}',
+  MY_NODE_NAME: '${MY_NODE_NAME}',
+  MY_POD_NAME: '${MY_POD_NAME}',
+  MY_POD_NAMESPACE: '${MY_POD_NAMESPACE}',
+  MY_POD_IP: '${MY_POD_IP}',
+  MY_POD_SERVICE_ACCOUNT: '${MY_POD_SERVICE_ACCOUNT}'
+}
