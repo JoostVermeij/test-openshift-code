@@ -23,12 +23,12 @@ ARG DEPLOYMENT_NAME="prod"
 #ENV MY_POD_IP="pod_ip_${DEPLOYMENT_NAME}_${MY_POD_IP}"
 #ENV MY_POD_SERVICE_ACCOUNT="pod_service_account_${DEPLOYMENT_NAME}_${MY_POD_SERVICE_ACCOUNT}"
 
-RUN cat /pod-data/environment.$DEPLOYMENT_NAME.ts
-RUN cp /pod-data/environment.$DEPLOYMENT_NAME.ts /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
+#RUN #cat /pod-data/environment.$DEPLOYMENT_NAME.ts
+#RUN cp /pod-data/config.json /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
 
 #RUN npm install -g envsub
 #RUN envsub /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
-RUN cat /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
+#RUN cat /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
 
 #RUN npm install -g @angular/cli
 RUN npm install
