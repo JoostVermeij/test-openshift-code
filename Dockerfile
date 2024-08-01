@@ -9,22 +9,25 @@ RUN echo $PATH
 
 ARG DEPLOYMENT_NAME="prod"
 
-ARG MESSAGE
-ARG MY_NODE_NAME
-ARG MY_POD_NAME
-ARG MY_POD_NAMESPACE
-ARG MY_POD_IP
-ARG MY_POD_SERVICE_ACCOUNT
+#ARG MESSAGE
+#ARG MY_NODE_NAME
+#ARG MY_POD_NAME
+#ARG MY_POD_NAMESPACE
+#ARG MY_POD_IP
+#ARG MY_POD_SERVICE_ACCOUNT
+#
+#ENV MESSAGE="message_${DEPLOYMENT_NAME}_${MESSAGE}"
+#ENV POD_NAME="pod_name_${DEPLOYMENT_NAME}_${POD_NAME}"
+#ENV MY_NODE_NAME="node_name_${DEPLOYMENT_NAME}_${MY_NODE_NAME}"
+#ENV MY_POD_NAMESPACE="pod_namespace_${DEPLOYMENT_NAME}_${MY_POD_NAMESPACE}"
+#ENV MY_POD_IP="pod_ip_${DEPLOYMENT_NAME}_${MY_POD_IP}"
+#ENV MY_POD_SERVICE_ACCOUNT="pod_service_account_${DEPLOYMENT_NAME}_${MY_POD_SERVICE_ACCOUNT}"
 
-ENV MESSAGE="message_${DEPLOYMENT_NAME}_${MESSAGE}"
-ENV POD_NAME="pod_name_${DEPLOYMENT_NAME}_${POD_NAME}"
-ENV MY_NODE_NAME="node_name_${DEPLOYMENT_NAME}_${MY_NODE_NAME}"
-ENV MY_POD_NAMESPACE="pod_namespace_${DEPLOYMENT_NAME}_${MY_POD_NAMESPACE}"
-ENV MY_POD_IP="pod_ip_${DEPLOYMENT_NAME}_${MY_POD_IP}"
-ENV MY_POD_SERVICE_ACCOUNT="pod_service_account_${DEPLOYMENT_NAME}_${MY_POD_SERVICE_ACCOUNT}"
+RUN cat /pod-data/environment.$DEPLOYMENT_NAME.ts
+RUN cp /pod-data/environment.$DEPLOYMENT_NAME.ts /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
 
-RUN npm install -g envsub
-RUN envsub /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
+#RUN npm install -g envsub
+#RUN envsub /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
 RUN cat /nodeApp/src/environments/environment.$DEPLOYMENT_NAME.ts
 
 #RUN npm install -g @angular/cli
@@ -59,9 +62,11 @@ COPY --from=nodeApp /nodeApp/nginx.conf /etc/nginx/conf.d/default.conf
 #RUN cat /usr/share/nginx/html/ngssc.json
 
 #RUN cat /usr/share/nginx/html
-RUN echo "nginx app done"
 
 EXPOSE 8081
 USER daemon
+
+RUN echo "nginx app done"
+
 CMD ["nginx", "-g", "daemon off;"]
 #, "&&", "/nginxApp/ngssc", "insert", "--nginx", " /usr/share/nginx/html"]
