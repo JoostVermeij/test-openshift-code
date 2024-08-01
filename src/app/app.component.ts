@@ -1,5 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {environment} from "../environments/environment";
+// @ts-ignore
+import * as config from "./config.json";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,8 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.environmentNew = environment;
-    console.log("environment", environment)
+    console.log("environment", environment);
+    console.log("config", config);
   }
 
 }
